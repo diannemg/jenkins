@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: jenkinsci/blueocean
+        image: gcr.io/active-module-235013/github.com/diannemg/jenkins:kubectl
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
