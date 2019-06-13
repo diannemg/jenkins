@@ -8,7 +8,5 @@ parameters:
  description: "Nimble Storage Class"
  nameSuffix: ""
  mountConflictDelay: "150"
- protectionTemplate: "jenkins-template"
- perfPolicy: "Other"
- 
- 
+ importVol: "nimble-jenkins-class-8759e8ae-8bd8-11e9-9831-32c3179a1881"
+ forceImport: "true" 

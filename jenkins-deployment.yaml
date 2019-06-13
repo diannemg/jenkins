@@ -21,6 +21,8 @@ metadata:
     app: jenkins
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: jenkins
@@ -31,9 +33,11 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: bibinwilson/priveleged-jenkins
+        image: jenkinsci/blueocean
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        - containerPort: 50000
         volumeMounts:
               - name: jenkins
                 mountPath: /var/jenkins_home
@@ -41,3 +45,13 @@ spec:
       - name: jenkins
         persistentVolumeClaim:
            claimName: jenkins-pvc
+      initContainers:
+      - name: permissionsfix
+        image: alpine:latest
+        command: ["bin/sh", "-c"]
+        args:
+        - chown 1000:1000 /var/jenkins_home;
+        volumeMounts:
+        - name: jenkins
+          mountPath: /var/jenkins_home  
+      restartPolicy: Always          
