@@ -7,10 +7,13 @@ run chmod +x ./kubectl
 run mv ./kubectl /usr/local/bin/kubectl
 
 #Install Python
-RUN apt-get update
-RUN apt-get install -y python-pip
-# Install app dependencies
-RUN pip install --upgrade pip
+RUN apk add --no-cache --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+    && pip install virtualenv \
+    && rm -rf /var/cache/apk/*
 
 #Install gcloud
 # Downloading gcloud package
