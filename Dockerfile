@@ -15,9 +15,11 @@ RUN apk add --no-cache --update \
     && pip install virtualenv \
     && rm -rf /var/cache/apk/*
 
+RUN apk add tar
+
 #Install gcloud
 # Downloading gcloud package
-RUN curl https://sdk.cloud.google.com > /tmp/google-cloud-sdk.tar.gz
+RUN curl -LO https://sdk.cloud.google.com > /tmp/google-cloud-sdk.tar.gz
 
 # Installing the package
 RUN mkdir -p /usr/local/gcloud \
